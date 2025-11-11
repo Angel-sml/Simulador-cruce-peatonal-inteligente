@@ -83,10 +83,7 @@ class VisualizadorSimulacion:
                     for ax in [ax1, ax2]:
                         ax.axvspan(evento['tiempo'], 
                                   evento['tiempo'] + evento['duracion'],
-                                  color=color, alpha=alpha)
-        
-        plt.tight_layout()
-        
+                                  color=color, alpha=alpha)  
         if guardar:
             path = os.path.join(self.directorio_salida, 'series_temporales_colas.png')
             plt.savefig(path, dpi=300, bbox_inches='tight')
@@ -134,7 +131,7 @@ class VisualizadorSimulacion:
             ax2.legend()
             ax2.grid(True, alpha=0.3)
         
-        plt.tight_layout()
+        #.
         
         if guardar:
             path = os.path.join(self.directorio_salida, 'histogramas_espera.png')
@@ -173,7 +170,7 @@ class VisualizadorSimulacion:
         ax.grid(True, alpha=0.3)
         ax.set_ylim([0, 1])
         
-        plt.tight_layout()
+        #.
         
         if guardar:
             path = os.path.join(self.directorio_salida, 'cdf_espera.png')
@@ -197,7 +194,7 @@ class VisualizadorSimulacion:
             print("⚠️  No hay suficientes ciclos para graficar")
             return None
         
-        fig, ax = plt.subplots(figsize=(14, max(6, n_ciclos * 0.5)))
+        fig, ax = plt.subplots(figsize=(14, min(12, max(6, n_ciclos * 0.5))))
         
         # Colores por fase
         colores = {
@@ -255,7 +252,7 @@ class VisualizadorSimulacion:
         ]
         ax.legend(handles=legend_elements, loc='upper right', fontsize=9)
         
-        plt.tight_layout()
+        #.
         
         if guardar:
             path = os.path.join(self.directorio_salida, 'gantt_ciclos.png')
@@ -295,7 +292,7 @@ class VisualizadorSimulacion:
             ax.set_title('Comparación de Tiempos de Espera', fontsize=13, fontweight='bold')
             ax.grid(True, axis='y', alpha=0.3)
         
-        plt.tight_layout()
+        #.
         
         if guardar:
             path = os.path.join(self.directorio_salida, 'boxplot_espera.png')
@@ -339,7 +336,7 @@ class VisualizadorSimulacion:
             ax2.legend()
             ax2.grid(True, axis='y', alpha=0.3)
         
-        plt.tight_layout()
+        #.
         
         if guardar:
             path = os.path.join(self.directorio_salida, 'metricas_por_ciclo.png')
@@ -381,7 +378,7 @@ class VisualizadorSimulacion:
         
         # Gantt
         print("📊 Generando diagrama de Gantt...")
-        fig = self.graficar_gantt_ciclos(n_ciclos=10)
+        fig = self.graficar_gantt_ciclos(n_ciclos=5)
         if fig:
             graficos_generados.append('gantt_ciclos.png')
             plt.close(fig)
@@ -464,7 +461,7 @@ def comparar_visualizaciones(analizador_fijo, analizador_adaptativo, directorio_
     
     plt.suptitle('Comparación: Semáforo Fijo vs Adaptativo', 
                 fontsize=15, fontweight='bold', y=1.00)
-    plt.tight_layout()
+    #.
     
     path = os.path.join(directorio_salida, 'comparacion_fijo_vs_adaptativo.png')
     plt.savefig(path, dpi=300, bbox_inches='tight')
